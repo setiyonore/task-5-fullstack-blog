@@ -49,4 +49,18 @@ class BlogController extends Controller
         ]);
         return redirect()->route('blog.home');
     }
+
+    public function read($id)
+    {
+        $data = Post::leftJoin('categories as c','c.id','posts.category_id')
+                ->leftJoin('users as u','u.id','posts.user_id')
+                ->select(
+                    'posts.id','posts.title','posts.content','posts.image',
+                    'c.name as category','u.name as author','posts.created_at as date',
+                    'u.id as user_id'
+                )
+                ->where('posts.id',$id)
+                ->first();
+        return view('pages.posts.detailPost',compact('data'));
+    }
 }

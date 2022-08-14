@@ -18,6 +18,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['prefix'=>'post'],function(){
     Route::get('/create',[BlogController::class,'create'])->name('post.create');
     Route::post('/store',[BlogController::class,'store'])->name('post.store');
+    Route::get('/read/{id}',[BlogController::class,'read'])->name('post.read');
 });
 });
 
