@@ -19,6 +19,9 @@ Route::group(['prefix'=>'post'],function(){
     Route::get('/create',[BlogController::class,'create'])->name('post.create');
     Route::post('/store',[BlogController::class,'store'])->name('post.store');
     Route::get('/read/{id}',[BlogController::class,'read'])->name('post.read');
+    Route::get('/edit/{id}',[BlogController::class,'edit'])->name('post.edit');
+    Route::post('/update',[BlogController::class,'update'])->name('post.update');
+    Route::delete('/destroy/{id}',[BlogController::class,'destroy'])->name('post.destroy');
 });
 });
 

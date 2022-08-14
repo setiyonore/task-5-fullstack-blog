@@ -22,12 +22,13 @@
                 </ul>
             </div><br />
             @endif
-            <form method="POST" action="{{route('post.store')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{route('post.update')}}" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" value="{{$post->id}}" name="id">
                 <div class="col-6">
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" name="title" class="form-control" id="title">
+                        <input type="text" name="title" class="form-control" id="title" value="{{$post->title}}">
                     </div>
                 </div>
                 <div class="col-6">
@@ -35,6 +36,9 @@
                         <label for="category">Category</label>
                         <select class="form-control" name="category" id="category">
                             @foreach ($category as $val)
+                                @if ($val->id == $post->category_id)
+                                <option value="{{$val->id}}" selected>{{$val->name}}</option>
+                                @endif
                                 <option value="{{$val->id}}">{{$val->name}}</option>
                             @endforeach
                         </select>
@@ -44,7 +48,7 @@
                     <label for="editor">Content</label>
                     <div class="form-group">
                         {{-- <div id="editor" name="content"> --}}
-                            <textarea name="content" id="content" cols="30" rows="10"></textarea>
+                            <textarea name="content" id="content" cols="30" rows="10">{!!$post->content!!}</textarea>
                     </div>
                 </div>
                 <div class="col-12">

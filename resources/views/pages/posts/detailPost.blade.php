@@ -6,8 +6,13 @@
                 <div class="col-12">
                     <div class="col-12">
                         @if ($data->user_id == \Auth::id())
-                            <a href="#" class="btn btn-primary float-right">Edit</a>
-                            <button class="btn btn-danger">Hapus</button>
+                            <a href="{{url('/post/edit/'.$data->id)}}" class="btn btn-primary float-right">Edit</a>
+                            {{-- <a href="{{url('/post/destroy/'.$data->id)}}" class="btn btn-danger" onclick="confirm('Delete Post?')">Hapus</a> --}}
+                            <form action="{{ url('/post/destroy/'.$data->id) }}" method="post">
+                                <input class="btn btn-danger" type="submit" value="Delete" onclick="confirm('Delete post ?')" />
+                                <input type="hidden" name="_method" value="delete" />
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            </form>
                         @endif
                     </div>
                     <hr class="tm-hr-primary tm-mb-55">

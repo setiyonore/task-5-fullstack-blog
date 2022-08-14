@@ -63,4 +63,55 @@ class BlogController extends Controller
                 ->first();
         return view('pages.posts.detailPost',compact('data'));
     }
+
+    public function edit($id)
+    {
+        $post = $data = Post::leftJoin('categories as c','c.id','posts.category_id')
+        ->leftJoin('users as u','u.id','posts.user_id')
+        ->select(
+            'posts.id','posts.title','posts.content','posts.image',
+            'c.name as category','u.name as author','posts.created_at as date',
+            'u.id as user_id','posts.category_id'
+        )
+        ->where('posts.id',$id)
+        ->first();
+
+        $category = Category::select('id','name')->get();
+        return view('pages.posts.edit',compact('post','category'));
+    }
+
+    public function update(Request $request)
+    {
+        $this->validate($request,[
+            'title' => 'required',
+            'category' => 'required',
+            'content' => 'required'
+        ]);
+        $post = Post::findOrFail($request->id);
+        if($request->file('image')){
+            $image = $request->file('image');
+            $image->storeAs('public/post',$image->getClientOriginalName());
+            $post->update([
+                'title' => $request->title,
+                'category' => $request->category,
+                'content' => $request->content,
+                'image' => $image->getClientOriginalName(),
+            ]);
+        } else {
+            $post->update([
+                'title' => $request->title,
+                'category' => $request->category,
+                'content' => $request->content,
+            ]);
+        }
+
+        return redirect()->route('blog.home');
+    }
+
+    public function destroy($id)
+    {
+        $data = Post::findOrFail($id);
+        $data->delete();
+        return redirect()->route('blog.home');
+    }
 }
