@@ -6,10 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Task Blog</title>
     @include('partial.includecss')
+    @yield('include')
+    @yield('style')
 </head>
 <body>
     @include('partial.header')
     @yield('content')
     @include('partial.includejs')
+    @yield('script')
 </body>
 </html>

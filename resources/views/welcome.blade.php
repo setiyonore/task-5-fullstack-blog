@@ -19,17 +19,17 @@
                 <hr class="tm-hr-primary">
                 <a href="post.html" class="effect-lily tm-post-link tm-pt-60">
                     <div class="tm-post-link-inner">
-                        <img src="{{$val->image}}" alt="Image" class="img-fluid">
+                        <img src="{{asset('storage/post/'.$val->image)}}" alt="Image" class="img-fluid">
                     </div>
                     <span class="position-absolute tm-new-badge">New</span>
                     <h2 class="tm-pt-30 tm-color-primary tm-post-title">{{$val->title}}</h2>
                 </a>
                 <p class="tm-pt-30">
-                    {{$val->content}}
+                    {!!$val->content!!}
                 </p>
                 <div class="d-flex justify-content-between tm-pt-45">
                     <span class="tm-color-primary">{{$val->category}}</span>
-                    <span class="tm-color-primary">June 24, 2020</span>
+                    <span class="tm-color-primary"> {{ \Carbon\Carbon::parse($val->date)->diffForHumans() }}</span>
                 </div>
                 <hr>
                 <div class="d-flex justify-content-between">
