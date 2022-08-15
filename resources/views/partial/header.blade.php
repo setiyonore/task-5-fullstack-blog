@@ -9,14 +9,24 @@
         </div>
         <nav class="tm-nav" id="tm-nav">
             <ul>
-                <li class="{{ request()->route()->named('blog.home') ? 'tm-nav-item active' : 'tm-nav-item'}}"><a href="{{route('blog.home')}}" class="tm-nav-link">
-                    <i class="fas fa-home"></i>
-                    Blog Home
-                </a></li>
-                <li class="{{ request()->route()->named('post.create') ? 'tm-nav-item active' : 'tm-nav-item'}}"><a href="{{route('post.create')}}" class="tm-nav-link">
-                    <i class="fas fa-pen"></i>
-                    Create Post
-                </a></li>
+                <li class="{{ request()->route()->named('blog.home') ? 'tm-nav-item active' : 'tm-nav-item'}}">
+                    <a href="{{route('blog.home')}}" class="tm-nav-link">
+                        <i class="fas fa-home"></i>
+                        Blog Home
+                    </a>
+                </li>
+                <li class="{{ request()->route()->named('post.create') ? 'tm-nav-item active' : 'tm-nav-item'}}">
+                    <a href="{{route('post.create')}}" class="tm-nav-link">
+                        <i class="fas fa-pen"></i>
+                        Create Post
+                    </a>
+                </li>
+                <li class="{{ request()->route()->named('category.index') ? 'tm-nav-item active' : 'tm-nav-item'}}">
+                    <a href="{{route('category.index')}}" class="tm-nav-link">
+                        <i class="fas fa-list"></i>
+                        category
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>
