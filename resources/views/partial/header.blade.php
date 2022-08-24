@@ -21,12 +21,28 @@
                         Create Post
                     </a>
                 </li>
+                @role('admin')
                 <li class="{{ request()->route()->named('category.index') ? 'tm-nav-item active' : 'tm-nav-item'}}">
                     <a href="{{route('category.index')}}" class="tm-nav-link">
                         <i class="fas fa-list"></i>
                         category
                     </a>
                 </li>
+                @endrole
+                @if (Auth::check())
+                <li class="tm-nav-item">
+                    <a class="tm-nav-link" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                        <i class="fas fa-sign-out-alt"></i>
+                        {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
+                @endif
             </ul>
         </nav>
     </div>

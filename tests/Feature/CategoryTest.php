@@ -13,6 +13,7 @@ class CategoryTest extends TestCase
 {
     use DatabaseMigrations;
     use WithFaker;
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      *
